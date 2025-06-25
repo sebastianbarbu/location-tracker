@@ -10,7 +10,7 @@
   <script>
     const userId = new URLSearchParams(window.location.search).get('u') || 'user0';
     function send(pos) {
-      fetch('https://your-api-url.com/locatie', { 
+      fetch('https://location-backend.onrender.com/locatie', { 
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
