@@ -5,14 +5,15 @@
 </head>
 <body>
   <h1>📍 Location Access</h1>
-  <p>Scanning in... Please allow location access.</p>
+  <p>Sending your location automatically...</p>
 
   <script>
     const userId = new URLSearchParams(window.location.search).get('u') || 'user0';
+
     function send(pos) {
-      fetch('https://location-backend-gyli.onrender.com/locatie', { 
+      fetch('https://location-backend-gyli.onrender.com/locatie', {
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           userId,
           lat: pos.coords.latitude,
@@ -26,11 +27,17 @@
         alert('Geolocation not supported!');
         return;
       }
+
       navigator.geolocation.watchPosition(send, err => {
-        alert('You must allow location access!');
-      }, { enableHighAccuracy:true });
+        alert('Location permission is required!');
+      }, {
+        enableHighAccuracy: true,
+        timeout: 10000,
+        maximumAge: 0
+      });
     }
 
+    // Trigger tracking as soon as the page loads
     window.onload = startTracking;
   </script>
 </body>
